@@ -1,0 +1,25 @@
+/* style.css */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* Dark background helps the game canvas stand out */
+  background-color: #000000;
+  /* Prevents scrolling if the canvas is slightly larger than the window */
+  overflow: hidden;
+  /* Centers the canvas on the screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+canvas {
+  display: block;
+  /* Adds a subtle shadow to make the game feel like a floating window */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  /* Prevents the cursor from highlighting text when clicking fast */
+  user-select: none;
+  -webkit-user-select: none;
+}
