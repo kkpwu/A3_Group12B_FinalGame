@@ -66,7 +66,7 @@ function drawStartScreen() {
 function startLevel(levelKey) {
   currentLevelKey = levelKey;
   let config = LEVEL_CONFIG[levelKey];
-  activePopups = []; // Clear popups when starting any level
+  activePopups = [];
 
   initGrid(config.gridSize);
   gameState = levelKey === "tutorial" ? "tutorial" : "game";

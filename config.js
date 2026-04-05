@@ -32,9 +32,9 @@ const LEVEL_CONFIG = {
     timer: 60,
     popupsEnabled: true,
     popupFrequency: 5000, // Every 5 seconds on average
-    nextState: "impossible",
+    nextState: "extreme",
   },
-  impossible: {
+  extreme: {
     gridSize: 6,
     timer: 60,
     popupsEnabled: true,
