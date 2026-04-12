@@ -13,8 +13,14 @@
 **Pixel Alignment: Stability Crisis** is a serious game developed in p5.js that translates the clinical symptoms of **Generalized Anxiety Disorder (GAD)** into interactive gameplay.
 
 - **Concept:** The game explores the "Worry Loop"—the intersection of chronic pressure, intolerance of uncertainty, and intrusive thoughts.
-- **Mechanics:** Players engage in a core **Pattern Matching** task, swapping tiles on a randomized grid to match a target. This focus is disrupted by the **"Anxiety Engine,"** a system of relentless, intrusive pop-up errors that block the player’s view and interaction.
-- **Player Experience:** By combining a 60-second "Fight-or-Flight" timer with unavoidable interruptions, the game creates a high-stress environment that builds empathy for the functional impairment experienced by those with GAD.
+- **Core Mechanics:**
+  1. **Pattern Matching:** Swapping tiles on a randomized grid to match a target, representing the effort required to maintain cognitive order.
+  2. **The Anxiety Engine:** A system of relentless, intrusive pop-up errors that physically block the player’s view, simulating disruptive intrusive thoughts.
+  3. **System Stability HUD:** A dynamic health bar synced to the level timer. As stability drops, the game environment becomes increasingly hostile.
+  4. **Somatic Simulation (Screen Shake):** At critical stability levels (<30%), the entire canvas vibrates, mimicking the physical tremors and heart palpitations associated with a panic response.
+  5. **Intolerance of Uncertainty (Sticky Tiles):** On higher difficulties, specific tiles require multiple clicks to activate, simulating the mental "friction" of ruminative thinking.
+  6. **Cognitive Tunneling (Static Fog):** A visual noise overlay that creeps in from the screen edges as the timer nears zero, narrowing the player's field of vision to simulate stress-induced tunnel vision.
+- **Player Experience:** By combining a "Fight-or-Flight" countdown with unavoidable interruptions, the game creates a high-stress environment designed to build empathy for the functional impairment experienced by those with GAD.
 
 ## 4. Setup and Interaction Instructions
 
@@ -31,6 +37,7 @@
 - **Mouse Click:** Swap grid tiles and click "Close" buttons on pop-up errors.
 - **Spacebar:** Toggle **Zen Pause** (Deep Breath mode) to reset the visual field and pause the countdown.
 - **'R' Key:** Restart the challenge at any time.
+- **'W' Key:** Instant alignment (Developers shortcut)
 
 ## 5. Iteration Notes
 
@@ -42,8 +49,11 @@
 
 ### b. Post-Showcase
 
-1.  **Complexity Scaling:** Implementing more complex interaction layers, such as requiring specific sequences of clicks or "held" keys to clear advanced anxiety pop-ups, moving beyond simple click-to-close.
-2.  **Multi-Channel Affordances:** Adding unique symbols/icons to
+1. Visual Stability Feedback: Replaced the standard numerical timer with a dynamic Stability Bar at the bottom of the HUD. This provides an immediate, color-coded visual of the player's "mental state."
+
+2. Somatic Simulation: Added a Screen Shake effect that triggers on higher difficulty levels (Medium+) when stability falls into the critical zone (below 30%). This translates internal distress into external visual feedback.
+
+3. Multi-Channel Affordances: Integrated unique audio-visual cues, pairing specific pop-up types with distinct error sounds to simulate the overwhelming sensory input of a panic response.
 
 ## 6. Assets
 
@@ -51,6 +61,7 @@ All visual assets and code were created by Group 12B specifically for this proje
 
 - **Zen Stone Imagery:** Original digital composition created by Group 12B, 2026.
 - **UI Assets:** Custom window renders designed in p5.js by Karen Wu.
+- **Sounds:** Original compositions and curated SFX for error states.
 
 ## 7. References
 
