@@ -34,10 +34,19 @@
 
 ### Interaction
 
+#### Player Controls
+
 - **Mouse Click:** Swap grid tiles and click "Close" buttons on pop-up errors.
 - **Spacebar:** Toggle **Zen Pause** (Deep Breath mode) to reset the visual field and pause the countdown.
-- **'R' Key:** Restart the challenge at any time.
-- **'W' Key:** Instant alignment (Developers shortcut)
+- **'R' Key:** Restart the current level immediately.
+
+#### Developer & Debug Commands
+
+- **Keys '1' through '6':** Jump directly to specific levels (Tutorial through Extreme).
+- **'N' Key:** Skip to the next level.
+- **'W' Key:** Instant Win (aligns the grid automatically).
+- **'T' Key:** Add 30 seconds to the stability timer.
+- **'C' Key:** Force clear all active anxiety pop-ups.
 
 ## 5. Iteration Notes
 
