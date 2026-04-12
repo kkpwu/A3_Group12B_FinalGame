@@ -19,9 +19,6 @@ let startBG,
   loseBG,
   pauseBG;
 
-let hourglassSheet;
-let hourglasses = [];
-
 let timer = 60;
 let timerInterval;
 
@@ -40,7 +37,6 @@ function preload() {
   gameBG1 = loadImage("assets/backgrounds/Game.1.png");
   gameBG2 = loadImage("assets/backgrounds/Game.2.png");
   gameBG3 = loadImage("assets/backgrounds/Game.3.png");
-  hourglassSheet = loadImage("assets/spritesheet hourglass.png");
   gameBG4 = loadImage("assets/backgrounds/Game.4.png");
   gameBG5 = loadImage("assets/backgrounds/Game.5.png");
 
@@ -79,7 +75,6 @@ function draw() {
     background(0);
     noTint();
 
-    // 1. Pick the correct static background
     let bgToDraw = gameBG1;
     if (currentLevelKey === "super_easy") bgToDraw = gameBG1;
     else if (currentLevelKey === "easy") bgToDraw = gameBG2;
@@ -89,31 +84,9 @@ function draw() {
 
     if (bgToDraw) image(bgToDraw, 0, 0, width, height);
 
-    // 2. Draw Game Elements
     drawGameScreen();
     handlePopups();
     drawPopups();
-
-    // 3. --- NEW: DRAW HOURGLASS SPRITES ---
-    // This only triggers on "medium" (Level 4)
-    if (currentLevelKey === "medium") {
-      // Create them if they don't exist yet for this level
-      if (hourglasses.length === 0) {
-        for (let i = 0; i < 12; i++) {
-          hourglasses.push(new Hourglass());
-        }
-      }
-
-      // Update and Draw each hourglass
-      let isPanic = timer < 15;
-      for (let h of hourglasses) {
-        h.update(isPanic);
-        h.display();
-      }
-    } else {
-      // Clear the array when not on Level 4 to save performance
-      if (hourglasses.length > 0) hourglasses = [];
-    }
   } else if (gameState === "instructions") {
     if (instructionsBG) image(instructionsBG, 0, 0, width, height);
     drawInstructionsScreen();
@@ -126,53 +99,6 @@ function draw() {
   } else if (gameState === "pause") {
     if (pauseBG) image(pauseBG, 0, 0, width, height);
     drawPauseScreen();
-  }
-}
-
-// --- SPRITE CLASS ---
-class Hourglass {
-  constructor() {
-    let side = random([0, 1]);
-    this.x = side === 0 ? random(0, 300) : random(width - 300, width);
-    this.y = random(height);
-    this.side = side;
-    this.speedX = random(-1, 1);
-    this.speedY = random(-1.5, 1.5);
-    this.currentFrame = floor(random(180));
-    this.totalFrames = 180;
-    this.cols = 10;
-    this.rows = 18;
-    this.size = random(150, 300);
-  }
-
-  update(isPanic) {
-    let mult = isPanic ? 4 : 1;
-    this.x += this.speedX * mult;
-    this.y += this.speedY * mult;
-    this.currentFrame =
-      (this.currentFrame + (isPanic ? 0.8 : 0.2)) % this.totalFrames;
-
-    if (this.side === 0) {
-      if (this.x < 0 || this.x > 350) this.speedX *= -1;
-    } else {
-      if (this.x < width - 350 || this.x > width) this.speedX *= -1;
-    }
-    if (this.y < 0 || this.y > height) this.speedY *= -1;
-  }
-
-  display() {
-    let frameIdx = floor(this.currentFrame);
-    let w = hourglassSheet.width / this.cols;
-    let h = hourglassSheet.height / this.rows;
-    let sx = (frameIdx % this.cols) * w;
-    let sy = floor(frameIdx / this.cols) * h;
-
-    push();
-    imageMode(CENTER);
-    blendMode(SCREEN);
-    image(hourglassSheet, this.x, this.y, this.size, this.size, sx, sy, w, h);
-    blendMode(BLEND);
-    pop();
   }
 }
 
