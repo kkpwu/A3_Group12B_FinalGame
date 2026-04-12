@@ -1,44 +1,44 @@
 const LEVEL_CONFIG = {
   tutorial: {
     gridSize: 3,
-    timer: null, // null means no timer
+    timer: null,
     popupsEnabled: false,
     popupFrequency: 0,
     nextState: "super_easy",
   },
   super_easy: {
     gridSize: 3,
-    timer: 60,
+    timer: 90,
     popupsEnabled: false,
     popupFrequency: 0,
     nextState: "easy",
   },
   easy: {
     gridSize: 4,
-    timer: 60,
+    timer: 100,
     popupsEnabled: true,
-    popupFrequency: 12000, // Every 12 seconds on average
+    popupFrequency: 12000,
     nextState: "medium",
   },
   medium: {
     gridSize: 4,
-    timer: 60,
+    timer: 120,
     popupsEnabled: true,
-    popupFrequency: 8000, // Every 8 seconds on average
+    popupFrequency: 8000,
     nextState: "hard",
   },
   hard: {
     gridSize: 5,
-    timer: 60,
+    timer: 150,
     popupsEnabled: true,
-    popupFrequency: 5000, // Every 5 seconds on average
+    popupFrequency: 5000,
     nextState: "extreme",
   },
   extreme: {
     gridSize: 6,
-    timer: 60,
+    timer: 180,
     popupsEnabled: true,
-    popupFrequency: 3000, // Every 3 seconds on average
+    popupFrequency: 3000,
     nextState: "win_screen",
   },
 };

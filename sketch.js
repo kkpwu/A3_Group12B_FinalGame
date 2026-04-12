@@ -28,6 +28,11 @@ let targetGrid = [];
 let playerGrid = [];
 let firstSelected = -1;
 
+// Point System
+let playerHealth = 100; // Starting health/points
+let maxHealth = 100;
+let score = 0; // Separate total score for the final screen
+
 function preload() {
   // Load Background Images
   startBG = loadImage("assets/backgrounds/Title.png");
@@ -62,6 +67,18 @@ function setup() {
 }
 
 function draw() {
+  push();
+
+  let isCritical = playerHealth < 30;
+  let isHardLevel =
+    currentLevelKey === "medium" ||
+    currentLevelKey === "hard" ||
+    currentLevelKey === "extreme";
+
+  if (isCritical && isHardLevel && gameState === "game") {
+    translate(random(-5, 5), random(-5, 5));
+  }
+
   background(50);
 
   // --- STATE MACHINE LOGIC ---
@@ -87,6 +104,23 @@ function draw() {
     drawGameScreen();
     handlePopups();
     drawPopups();
+
+    // --- Sync Health Bar with Game State ---
+    let maxTimeForLevel = LEVEL_CONFIG[currentLevelKey].timer || 60;
+    playerHealth = map(timer, 0, maxTimeForLevel, 0, 100);
+    playerHealth = constrain(playerHealth, 0, 100);
+    drawHealthBar();
+
+    if (timer <= 0) {
+      gameState = "lose";
+    }
+
+    // Health Logic
+    if (playerHealth > 0) {
+      playerHealth -= 0.02;
+    } else {
+      gameState = "lose";
+    }
   } else if (gameState === "instructions") {
     if (instructionsBG) image(instructionsBG, 0, 0, width, height);
     drawInstructionsScreen();
@@ -100,6 +134,8 @@ function draw() {
     if (pauseBG) image(pauseBG, 0, 0, width, height);
     drawPauseScreen();
   }
+
+  pop();
 }
 
 function mousePressed() {
@@ -205,4 +241,34 @@ function initGrid(size) {
     playerGrid[i] = playerGrid[j];
     playerGrid[j] = temp;
   }
+}
+
+function drawHealthBar() {
+  let barWidth = 600;
+  let barHeight = 25;
+  let x = width / 2 - barWidth / 2;
+  let y = 700;
+
+  // Draw Background (Gray)
+  fill(30);
+  stroke(255, 50);
+  rect(x, y, barWidth, barHeight, 5);
+
+  // Calculate Health Color (Green -> Red)
+  let barFill = map(playerHealth, 0, maxHealth, 0, barWidth);
+  let colorGreen = map(playerHealth, 0, maxHealth, 0, 255);
+  let colorRed = map(playerHealth, 0, maxHealth, 255, 0);
+
+  fill(colorRed, colorGreen, 0);
+  rect(x, y, barFill, barHeight, 5);
+
+  noStroke();
+  fill(colorRed, colorGreen, 0);
+  rect(x, y, barFill, barHeight, 5);
+
+  // Health Label
+  fill(255);
+  textSize(16);
+  textFont("Courier New"); // Fits your glitch/tech theme
+  text("STABILITY MARGIN: " + floor(playerHealth) + "%", width / 2, y + 45);
 }
